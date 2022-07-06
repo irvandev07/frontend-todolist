@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Todo-list</title>
+</head>
+<body>
+    <!-- start header -->
+    <header class="header">
+        <div class="header__inner container">
+          <h1 class="header__title">Todo-list</h1>
+          <form class="todo-form">
+            <div class="todo-form__group">
+              <input
+                type="text"
+                class="todo-form__input"
+                placeholder="Todo Title"
+                maxlength="20"
+                id="titleTodo"
+              />
+            </div>
+            <div class="todo-form__group">
+              <textarea class="todo-form__textarea" placeholder="Description" maxlength="120" id="descTodo"></textarea>
+            </div>
+            <button class="btn btn--primary" id="add--todo">Submit</button>
+          </form>
+          <div class="header__filters">
+            <div class="header__filters__item clear">
+              <span class="material-icons-outlined"> clear </span>
+                    blue
+            </div>
+            <div class="header__filters__item clear">
+                <span class="material-icons-outlined"> clear </span>
+                    red
+            </div>
+            <div class="header__filters__item clear">
+                <span class="material-icons-outlined"> clear </span>
+                    green
+            </div>
+          </div>
+        </div>
+    </header>
+    <!-- end header -->
+      
+    <!-- start body -->
+    <div class="body">
+        <div class="container">
+            <div class="cards">
+                <div class="cards__row"  id="card">
+                    <!-- <div class="card">
+                        <div class="card__header">
+                            <h3 class="card__title">Title Todo-list</h3>
+                        <div class="card__remove-icon">
+                            <span class="material-icons-outlined"> clear </span>
+                        </div>
+                        </div>
+                        <div class="card__body">
+                            <p class="card__text" style="color: #ccc;">saturday, 24</p>
+                            <p class="card__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+                        </div>
+                        <div class="card__footer">
+                        <div class="footer__item clear">
+                            <span class="material-icons-outlined"> clear </span>
+                            blue
+                        </div>
+                        <div class="footer__item">
+                            <span class="material-icons-outlined"> done </span>
+                            completed
+                        </div>
+                        </div>
+                        <div class="card__dropdown">
+                            <div class="card__dropdown__toggler">
+                                <span class="material-icons-outlined"> more_horiz</span>
+                            </div>
+                            <div class="card__dropdown__menu">
+                                <form class="card__dropdown__form">
+                                <div class="card__dropdown__form__group">
+                                    <a href="#" for="dropdownFilterColor1">Red</a>
+                                    <a href="#" for="dropdownFilterColor2">Blue</a>
+                                    <a href="#" for="dropdownFilterColor3">Green</a>
+                                    <a href="#" for="completeButton">Complete</a>
+                                    <a href="#" for="editButton">Edit</a>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end body -->
+</body>
+<script src="fuction.js" crossorigin="anonymous"></script>
+</html>
