@@ -14,13 +14,8 @@
           <h1 class="header__title">Todo-list</h1>
           <form class="todo-form">
             <div class="todo-form__group">
-              <input
-                type="text"
-                class="todo-form__input"
-                placeholder="Todo Title"
-                maxlength="20"
-                id="titleTodo"
-              />
+              <input type="text"class="todo-form__input" placeholder="Todo Title" maxlength="20" id="titleTodo"/>
+              <!-- <input type="text"class="todo-form__input" placeholder="Tags" maxlength="20" id="tags"/> -->
             </div>
             <div class="todo-form__group">
               <textarea class="todo-form__textarea" placeholder="Description" maxlength="120" id="descTodo"></textarea>
@@ -28,7 +23,7 @@
             <button class="btn btn--primary" id="add--todo">Submit</button>
           </form>
           <div class="header__filters">
-            <div class="header__filters__item clear">
+            <!-- <div class="header__filters__item clear">
               <span class="material-icons-outlined"> clear </span>
                     blue
             </div>
@@ -39,7 +34,7 @@
             <div class="header__filters__item clear">
                 <span class="material-icons-outlined"> clear </span>
                     green
-            </div>
+            </div> -->
           </div>
         </div>
     </header>
@@ -50,41 +45,37 @@
         <div class="container">
             <div class="cards">
                 <div class="cards__row"  id="card">
-                    <!-- <div class="card">
+                    <!-- <div class="card" id="newCard">
+                        <span class="card__status--progress">On progress</span>
+                        <span class="card__status--completed">Completed</span>
                         <div class="card__header">
-                            <h3 class="card__title">Title Todo-list</h3>
-                        <div class="card__remove-icon">
-                            <span class="material-icons-outlined"> clear </span>
-                        </div>
+                          <h3 class="card__title" contentEditable="true" id="title" maxlength="20">Todo Title</h3>
+                          <div class="card__remove-icon">
+                              <span class="material-icons-outlined"> clear </span>
+                          </div>
                         </div>
                         <div class="card__body">
-                            <p class="card__text" style="color: #ccc;">saturday, 24</p>
-                            <p class="card__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+                            <p class="card__text" style="color: #ccc; font-size:10px;">Monday Jul 06 2022</p>
+                            <p class="card__text" contentEditable="true" id="desc" maxlength="120">Lorem ipsum simply dummy text.</p>
                         </div>
                         <div class="card__footer">
-                        <div class="footer__item clear">
-                            <span class="material-icons-outlined"> clear </span>
-                            blue
-                        </div>
-                        <div class="footer__item">
-                            <span class="material-icons-outlined"> done </span>
-                            completed
-                        </div>
+                          <div class="footer__item clearTags" id="clearTags">
+                              <span class="material-icons-outlined"> clear </span>
+                              blue
+                          </div>
                         </div>
                         <div class="card__dropdown">
                             <div class="card__dropdown__toggler">
                                 <span class="material-icons-outlined"> more_horiz</span>
                             </div>
                             <div class="card__dropdown__menu">
-                                <form class="card__dropdown__form">
-                                <div class="card__dropdown__form__group">
-                                    <a href="#" for="dropdownFilterColor1">Red</a>
-                                    <a href="#" for="dropdownFilterColor2">Blue</a>
-                                    <a href="#" for="dropdownFilterColor3">Green</a>
-                                    <a href="#" for="completeButton">Complete</a>
-                                    <a href="#" for="editButton">Edit</a>
+                                <div class="card__dropdown__form">
+                                  <div class="card__dropdown__form__group">
+                                      <a href="#" for="completeButton">Complete</a>
+                                      <a href="#" for="editButton">Edit</a>
+                                      <a href="#" for="deleteButton">Delete</a>
+                                  </div>
                                 </div>
-                                </form>
                             </div>
                         </div>
                     </div> -->

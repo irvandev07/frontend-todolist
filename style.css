@@ -181,6 +181,11 @@ body {
     padding: 1.5rem 0;
 }
 
+.checked  {
+    text-decoration: line-through;
+    opacity: .5;
+}
+
 /* cards */
 .cards {
     width: 100%;
@@ -206,7 +211,7 @@ body {
 
 .card .card__header {
     display: -webkit-box;
-    display: -ms-flexbox;
+    display: -ms-inline-flexbox;
     display: flex;
     justify-content: space-between;
     align-self: center;
@@ -215,6 +220,44 @@ body {
 .card .card__title {
     font-size: 16px;
     color: #555;
+    padding: 5px 10px;
+    max-width: 90%;
+    margin-top: 10px;
+    margin-right: 10px;
+    font-weight: 700;
+}
+
+.card .card__title > *[contenteditable="true"]:focus {
+    /* background-color: rgba(217, 245, 255,0.5); */
+    border: 1px solid #ccc;
+}
+
+.card .card__status--progress--show {
+    font-size: 10px;
+    color: #d73e3e;
+    background-color: #ff787851;
+    border-radius: 15px;
+    margin-left: 5px;
+    padding: 5px 10px;
+    font-weight: 700;
+}
+
+.card .card__status--progress {
+    visibility: hidden;
+    display: none;
+}
+
+.card .card__status--completed {
+    visibility: hidden;
+    display: none;
+}
+
+.card .card__status--completed--show {
+    font-size: 10px;
+    color: #037720;
+    background-color: #40ff706b;
+    border-radius: 15px;
+    margin-left: 5px;
     padding: 5px 10px;
     font-weight: 700;
 }
@@ -282,6 +325,7 @@ body {
     line-height: 1.6;
     padding-left: 10px;
     padding-right: 10px;
+    max-width: 100%;
     font-weight: 400;
 }
 
@@ -328,7 +372,7 @@ body {
 
 .card .card__dropdown .card__dropdown__menu.card__dropdown__menu--show {
     width: 80px;
-    height: 140px;
+    height: 60px;
     transition: width 0.2s ease-in-out, height 0.2s ease-in;
 }
 
