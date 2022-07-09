@@ -40,6 +40,7 @@ body {
     font-weight: 700;
     color: #555;
     height: 40px;
+    width: 99%;
     padding: 0 1rem;
     border-radius: 5px;
     line-height: 40px;
@@ -133,19 +134,37 @@ body {
     outline: 0;
     transition: border 0.05s ease-in;
 }
+.todo-form .todo-form__input--tags {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-style: dashed;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+    font-size: 14px;
+    color: #555;
+    font-weight: 700;
+    outline: 0;
+    transition: border 0.05s ease-in;
+}
+
+.todo-form .todo-form__input--tags:focus{
+    border: 1px dashed #000;
+}
 
 .todo-form .todo-form__input:focus,
 .todo-form .todo-form__textarea:focus {
     border: 1px solid #000;
 }
 
-.todo-form .todo-form__input {
+.todo-form .todo-form__input,
+.todo-form .todo-form__input--tags {
     height: 40px;
     margin-bottom: 1rem;
     padding: 0 0.5rem;
 }
 
-.todo-form .todo-form__input::-webkit-input-placeholder {
+.todo-form .todo-form__input::-webkit-input-placeholder,
+.todo-form .todo-form__input--tags::-webkit-input-placeholder {
     font-size: 14px;
     color: #555;
     font-weight: 700;
@@ -174,6 +193,7 @@ body {
     padding: 0.5rem;
     margin-bottom: 1rem;
 }
+
 
 /* body */
 .body {
@@ -371,8 +391,8 @@ body {
 }
 
 .card .card__dropdown .card__dropdown__menu.card__dropdown__menu--show {
-    width: 80px;
-    height: 60px;
+    width: auto;
+    height: auto;
     transition: width 0.2s ease-in-out, height 0.2s ease-in;
 }
 
@@ -394,6 +414,7 @@ body {
 }
 
 .card .card__dropdown .card__dropdown__form a:hover{
+    font-weight: bold;
     color:  #000;
 }
 

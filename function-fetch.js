@@ -8,23 +8,23 @@ function getTodo(){
   }
   )
   .then(json => {
-    const getJson = json
-		for(let i = 0; i < getJson.length; i++){
+    console.log(json)
+		for(let i = 0; i < json.length; i++){
       const st = "06.06.2022";
       const pattern = /(\d{2})\.(\d{2})\.(\d{4})/;
       const dt = new Date(st.replace(pattern,'$3-$2-$1'));
       document.querySelector('#card').innerHTML += `
         <div class="card newCard" id="newCard">
-          <span class="card__status--progress--show status" id="status">On progress</span>
+          <span class="card__status--progress--show status__index--`+i+`" id="status">On progress</span>
             <div class="card__header">
-              <h3 class="card__title" contentEditable="true" id="title" maxlength="20">${getJson[i]['name']}</h3>
+              <h3 class="card__title card__index__title--`+i+`" id="title" maxlength="20">${json[i]['name']}</h3>
             </div>
             <div class="card__body">
-                <p class="card__text" style="color: #ccc; font-size:10px;">${dt.toDateString()}</p>
-                <p class="card__text desc" contentEditable="true" id="desc" maxlength="120">${getJson[i]['description']}</p>
+                <p class="card__text card__index__date--`+i+`" style="color: #ccc; font-size:10px;">${dt.toDateString()}</p>
+                <p class="card__text card__index__desc--`+i+`" id="desc" maxlength="120">${json[i]['description']}</p>
             </div>
             <div class="card__footer">
-              <div class="footer__item clearTags" id="clearTags">
+              <div class="footer__item clearTags__index--`+i+`" id="clearTags">
                   <span class="material-icons-outlined"> clear </span>
                   Tags
               </div>
@@ -36,13 +36,24 @@ function getTodo(){
                 <div class="card__dropdown__menu">
                     <div class="card__dropdown__form">
                       <div class="card__dropdown__form__group">
-                          <a href="#" for="completeButtonCard" class="completeButtonCard">Complete</a>
-                          <a href="#" for="deleteButtonCard" class="deleteButtonCard" onclick="deleteItem(${getJson[i]['id']})">Delete</a>
+                          <a href="#" for="completeButtonCard" class="completeButtonCard--`+i+`" onclick="completeItem(${json[i]['id']}, `+i+`)">Complete</a>
+                          <a href="#" for="deleteButtonCard" class="deleteButtonCard" onclick="deleteItem(${json[i]['id']})">Delete</a>
                       </div>
                     </div>
                 </div>
             </div>
-          </div>`
+        </div>`
+
+      if(json[i]['is_completed'] == true){
+        document.querySelector(".card__index__title--"+i).classList.toggle("checked")
+        document.querySelector(".card__index__date--"+i).classList.toggle("checked");
+        document.querySelector(".card__index__desc--"+i).classList.toggle("checked");
+        document.querySelector(".status__index--"+i).classList.remove("card__status--progress--show");
+        document.querySelector(".status__index--"+i).textContent ="Completed";
+        document.querySelector(".status__index--"+i).classList.toggle("card__status--completed--show");
+        document.querySelector(".clearTags__index--"+i ).classList.toggle("checked");
+        document.querySelector(".completeButtonCard--"+i).textContent ="Uncompleted";
+      }
 
       function dropdownMenuHandler(dropdownMenu) {
         if (dropdownMenu.classList.contains("card__dropdown__menu")) {
@@ -75,7 +86,7 @@ function getTodo(){
 		};
   })
   .catch((error) => {
-    alert('Error:', error);
+    alert('Error:'+ error);
   });
 }
 
@@ -89,7 +100,44 @@ function deleteItem(id) {
       }
   })
   .then(response => response.json())
-  .then(response => alert(response))
+  .then(response => {
+    alert('Successfuly deleted todo', response)
+    window.location.reload()
+  })
+}
+
+function completeItem(id, index) { 
+  const indexText = document.querySelector(".status__index--"+index).textContent
+  let statusTodo = ""
+  // console.log(indexText)
+  if (indexText == "Completed"){
+    statusTodo = JSON.stringify({
+      'is completed': false
+    })
+  }
+  else if (indexText == "On progress"){
+    statusTodo = JSON.stringify({
+      'is completed': true
+    })
+  }
+  fetch('http://127.0.0.1:5000/todos/'+id+'/', {
+      method: 'PUT',
+      mode: 'cors',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: statusTodo
+  })
+  .then(response => response.json())
+  .then(data => { 
+    // alert('Successfuly complete todo'+ data);
+    window.location.reload(data)
+    // update(data)
+  })
+  .catch(error => {
+    alert('Error:'+ error.response);
+  });
 }
 
 function addTodo() {
@@ -114,6 +162,7 @@ function addTodo() {
   .then(response => response.json())
   .then(data => {
     alert('Successfully create todo', data);
+    window.location.reload()
   })
   .catch((error) => {
     alert('Error:', error);
@@ -129,9 +178,12 @@ window.onload = function () {
   getTodo()
 
 	document.querySelector('#add--todo').onclick = function(){
-		if((document.querySelector('#titleTodo').value.length == 0) || (document.querySelector('#descTodo').value.length == 0)){
-				alert("Please Enter a Task")
+		if(document.querySelector('#titleTodo').value.length == 0){
+			alert("Please Enter a title !")
 		}
+    else if((document.querySelector('#descTodo').value.length == 0)){
+      alert("Please Enter a description !")
+    }
 		else{
       addTodo()
     }
