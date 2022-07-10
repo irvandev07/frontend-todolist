@@ -4,42 +4,116 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
     <link rel="stylesheet" href="style.css">
     <title>Todo-list</title>
 </head>
 <body>
-  <!-- start header -->
-  <header class="header">
-      <div class="header__inner container">
-        <h1 class="header__title">Todo-list</h1>
-        <form class="todo-form">
-          <div class="todo-form__group">
-            <input type="text"class="todo-form__input" placeholder="Todo Title" maxlength="20" id="titleTodo"/>
-          </div>
-          <div class="todo-form__group">
-            <input type="text"class="todo-form__input--tags" placeholder="Tags"/>
-          </div>
-          <div class="todo-form__group">
-            <textarea class="todo-form__textarea" placeholder="What is the task?" maxlength="120" id="descTodo"></textarea>
-          </div>
-          <button class="btn btn--primary" id="add--todo">Done</button>
-        </form>
-        <div class="header__filters">
-        </div>
-      </div>
-  </header>
-  <!-- end header -->
-    
   <!-- start body -->
-  <div class="body">
+  <div class="body" id="about">
       <div class="container">
           <div class="cards">
+              <div class="navbar">
+                <div class="logo">
+                  <h1 class="header__title">Create Task</h1>
+                  <a href="#create-task" class="btn__add--task" onclick="openModal()">+</a>
+                </div>
+                <div class="nav__links">
+                  <a href="#" class="active nav__link">All</a>
+                  <div class="dropdown__tags">
+                    <a href="#" class="nav__link">Tags</button>
+                    <div class="dropdown__content--tags">
+                      <a href="#">Link 1</a>
+                      <a href="#">Link 2</a>
+                      <a href="#">Link 3</a>
+                    </div>
+                  </div>
+                  <a href="#" class="nav__link completed__taks">Completed</a>
+                  <a href="#" class="nav__link onprogress__taks">On Progress</a>
+                </div>
+              </div>
               <div class="cards__row"  id="card">
               </div>
           </div>
       </div>
   </div>
   <!-- end body -->
+
+  <!-- start modal add-->
+  <div id="open-modal" class="modal-window">
+    <div class="modal-content">
+      <div class="modal_header">
+        <span class="modal__title">Create New Task</span>
+      </div>
+      <!-- start header -->
+      <div class="header" id="home">
+        <div class="header__inner container">
+          <form class="todo-form">
+            <div class="todo-form__group">
+              <input type="text"class="todo-form__input" placeholder="What is the task?" maxlength="20" id="titleTodo"/>
+            </div>
+            <div class="todo-form__group">
+              <input type="text"class="todo-form__input--tags" placeholder="Tags" id="tagsTodo"/>
+            </div>
+            <div class="todo-form__group">
+              <textarea class="todo-form__textarea" placeholder="what is the short description?" maxlength="500" id="descTodo"></textarea>
+            </div>
+            <div class="todo-form__group">
+              <button class="btn btn--danger" onclick="closeModal()">Close</button>
+              <button class="btn btn--primary" id="add--todo">Done</button>
+            </div>
+          </form>
+          <div class="header__filters">
+          </div>
+        </div>
+      </div>
+      <!-- end header -->
+    </div>
+  </div>
+  <!-- end modal add-->
+
+  <!-- start modal edit -->
+  <div id="open-modal-edit" class="modal-window">
+    <div class="modal-content">
+      <div class="modal_header">
+        <span class="modal__title">Update Task</span>
+      </div>
+      <!-- start header -->
+      <div class="header" id="home">
+        <div class="header__inner container">
+          <form class="todo-form">
+            <div class="todo-form__group">
+              <input type="text"class="todo-form__input" placeholder="What is the task?" maxlength="20" id="updateTitleTodo"/>
+            </div>
+            <div class="todo-form__group">
+              <input type="text"class="todo-form__input--tags" placeholder="Tags" id="updateTagsTodo"/>
+            </div>
+            <div class="todo-form__group">
+              <textarea class="todo-form__textarea" placeholder="what is the short description?" maxlength="500" id="updateDescTodo"></textarea>
+            </div>
+            <div class="todo-form__group">
+              <button class="btn btn--danger" onclick="closeEditItem()">Close</button>
+              <button class="btn btn--primary" id="add--todo" >Done</button>
+            </div>
+          </form>
+          <div class="header__filters">
+          </div>
+        </div>
+      </div>
+      <!-- end header -->
+    </div>
+  </div>
+  <!-- end modal edit -->
+
+  <!-- start footer -->
+  <div class="todo-footer">
+    © <script>
+      document.write(new Date().getFullYear())
+    </script>,
+    with <span class="material-symbols-outlined" style="font-size: 10px; color:red;">
+      favorite
+      </span> from <a href="https://www.instagram.com/irvansychrldi/" class="todo-footer__text" target="_blank">Irvan Syachrialdi</a>
+  </div>
 </body>
 <script src="function-fetch.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js"></script>
