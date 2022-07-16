@@ -3,13 +3,37 @@ window.onload = function () {
 	todoForm.onsubmit = function (e) {
 		e.preventDefault();
 	};
-	const clearButton = document.getElementsByClassName("clear");
-	for(let i = 0; i < clearButton.length; i++){
-		clearButton[i].onclick = function() {
-			clearButton[i].style.visibility = "hidden";
-			clearButton[i].style.display = "none"; 
+
+	function dropdownMenuHandler(dropdownMenu) {
+		if (dropdownMenu.classList.contains("card__dropdown__menu")) {
+			if (dropdownMenu.classList.contains("card__dropdown__menu--show")) {
+				dropdownMenu.classList.remove("card__dropdown__menu--show");
+			} else {
+				dropdownMenu.classList.add("card__dropdown__menu--show");
+			}
 		}
 	};
+
+	// card-dropdown
+	const cardDropdownToggler = document.querySelectorAll(
+		".card__dropdown__toggler"
+	);
+	cardDropdownToggler.forEach(function (item) {
+		item.onclick = function () {
+			const dropdownMenu = item.nextElementSibling;
+			dropdownMenuHandler(dropdownMenu);
+		};
+	});
+
+	const cardDropdownMenu = document.querySelectorAll(".card__dropdown__menu");
+	cardDropdownMenu.forEach(function (item) {
+		item.onclick = function (e) {
+			if (e.srcElement.checked) {
+				dropdownMenuHandler(e.currentTarget);
+			}
+		};
+	});
+	
 	document.querySelector('#add--todo').onclick = function(){
 		if((document.querySelector('#titleTodo').value.length == 0) || (document.querySelector('#descTodo').value.length == 0)){
 				alert("Please Enter a Task")
@@ -122,27 +146,56 @@ window.onload = function () {
 	}
 	
 };
-// function completed(){
-// 	const statusProgress = document.querySelector("#status")
-// 	// for(let i = 0; i < statusProgress.length; i++){
-// 	//   console.log(statusProgress[i])
-// 		if ( statusProgress.innerText == "On progress"){
-// 			document.querySelector(".card__title").classList.toggle("checked");
-// 			document.querySelector(".card__text").classList.toggle("checked");
-// 			document.querySelector(".desc").classList.toggle("checked");
-// 			document.querySelector("#status").classList.remove("card__status--progress--show");
-// 			document.querySelector("#status").textContent ="Completed";
-// 			document.querySelector("#status").classList.toggle("card__status--completed--show");
-// 			document.querySelector("#clearTags").classList.toggle("checked");
-// 		}
-// 		else if (statusProgress.innerText == "Completed"){
-// 			document.querySelector(".card__title").classList.remove("checked");
-// 			document.querySelector(".card__text").classList.remove("checked");
-// 			document.querySelector(".desc").classList.remove("checked");
-// 			document.querySelector("#status").classList.remove("card__status--completed--show");
-// 			document.querySelector("#status").textContent ="On progress";
-// 			document.querySelector("#status").classList.toggle("card__status--progress--show");
-// 			document.querySelector("#clearTags").classList.toggle("checked");
-// 		}
-// 	// };
-// }
+
+function onDragStart(event) {
+	event
+		.dataTransfer
+		.setData('text/plain', event.target.id);
+}
+function onDragOver(event) {
+	event.preventDefault();
+}
+function onDrop(event) {
+	const id = event
+      .dataTransfer
+      .getData('text');
+	const draggableElement = document.getElementById(id);
+	const dropzone = event.target;
+	// document.querySelector(".card__title").classList.toggle("checked")
+	document.querySelector(".card__text").classList.toggle("checked");
+	document.querySelector(".desc").classList.toggle("checked");
+	document.querySelector(".status").classList.remove("card__status--progress--show");
+	// document.querySelector(".status").textContent ="Completed";
+	document.querySelector(".status").classList.toggle("card__status--completed--show");
+	document.querySelector(".clearTags").classList.toggle("checked")
+	dropzone.appendChild(draggableElement);
+
+
+	event
+    .dataTransfer
+    .clearData();
+}
+function searchItem() {
+	// Declare variables
+	var input, filter, cardContainer, elemen, a, i, txtValue;
+	input = document.getElementById('search-todo');
+	filter = input.value.toUpperCase();
+	cardContainer = document.getElementById("cardContainer");
+	cardComp = document.getElementById("cardCompleted");
+	elemen = cardContainer.getElementsByTagName('div');
+	// a = li.getElementsByTagName(''); 
+	console.log(elemen)
+  
+	// Loop through all list items, and hide those who don't match the search query
+	for (i = 0; i < elemen.length; i++) {
+		var text = ("textContent" in document) ? "textContent" : "innerText";
+		a = elemen[i].getElementsByTagName("H3")[0];
+		txtValue = a.textContent;
+		console.log(a)
+		if (txtValue.toUpperCase().indexOf(filter) > -1) {
+			elemen[i].style.display = "";
+		} else {
+			elemen[i].style.display = "none";
+		}
+	}
+}
